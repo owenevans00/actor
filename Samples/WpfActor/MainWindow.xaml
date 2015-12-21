@@ -1,0 +1,13 @@
+﻿<Window x:Class="WpfActor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="44,21,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <TextBox x:Name="tbUrl" HorizontalAlignment="Left" Height="23" Margin="137,21,0,0" TextWrapping="Wrap" Text="http://www.microsoft.com" VerticalAlignment="Top" Width="317"/>
+        <!-- there should be an ItemsTemplate or something here but this is a demo of the underlying code, not a WPF hopwto -->
+        <DataGrid HorizontalAlignment="Left" Margin="44,60,0,0" VerticalAlignment="Top" Width="410" Height="219"
+                  ItemsSource="{Binding Path=ResponseTimes}"></DataGrid>
+
+    </Grid>
+</Window>
