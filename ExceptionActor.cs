@@ -8,7 +8,8 @@ namespace Actor
 {
     /// <summary>
     /// Demonstration class to show how to trap exceptions in the Actor pattern - 
-    /// it's basically the same as any other actor-based operation
+    /// it's basically the same as any other actor-based operation; it simply logs
+    /// the exception to the command prompt
     /// </summary>
     public class ExceptionActor : ActorBase
     {

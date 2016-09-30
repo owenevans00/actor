@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Actor
 {
@@ -6,11 +7,11 @@ namespace Actor
     /// The basic Actor interface. Clients pass in a message, which encapsulates some state and 
     /// optionally a reference to another actor. As with actor implementations in more functional
     /// languages the implementation needs to recognize the type of the message, and will then 
-    /// act appropriately on that state. Internally the implementation uses a hashtable keyed on type
-    /// rather than language native pattern matching but the concept is similar.
+    /// act appropriately on that state. Internally the implementation uses a hashtable keyed on 
+    /// type rather than language native pattern matching but the concept is similar.
     /// 
-    /// The Actor pattern relies on Actor implementations being *containers for logic*, and messages
-    /// being *containers for data*.
+    /// The Actor pattern relies on Actor implementations being "containers for logic", and
+    /// messages being "containers for data".
     /// Each message should be independent of any other messages in the system and
     /// so implementations of IActor that are not explicitly state machines should be careful not 
     /// to keep any state that is not in the message.
@@ -25,20 +26,35 @@ namespace Actor
     {
         void Post<TState>(Message<TState> message);
 
-        void Post<TState>(Message<TState> message, Action resultHandler);
+        void Post<TState>(Message<TState> message, 
+                          Action resultHandler);
 
-        void Post<TState>(Message<TState> message, Action<Exception> exceptionHandler);
+        void Post<TState>(Message<TState> message, 
+                          Action<Exception> exceptionHandler);
         
-        void Post<TState>(Message<TState> message, Action resultHandler, Action<Exception> exceptionHandler);
+        void Post<TState>(Message<TState> message, 
+                          Action resultHandler, 
+                          Action<Exception> exceptionHandler);
 
         void Post<TState, TResult>(Message<TState> message);
 
-        void Post<TState, TResult>(Message<TState> message, Action<TResult> resultHandler);
+        void Post<TState, TResult>(Message<TState> message, 
+                                   Action<TResult> resultHandler);
 
-        void Post<TState, TResult>(Message<TState> message, Action<Exception> exceptionHandler);
+        void Post<TState, TResult>(Message<TState> message, 
+                                   Action<Exception> exceptionHandler);
 
-        void Post<TState, TResult>(Message<TState> message, Action<TResult> resultHandler, Action<Exception> exceptionHandler);
+        void Post<TState, TResult>(Message<TState> message, 
+                                   Action<TResult> resultHandler, 
+                                   Action<Exception> exceptionHandler);
 
         void Start();
+
+        /// <summary>
+        /// Return any pending work items for reassignment
+        /// </summary>
+        /// <typeparam name="TState"></typeparam>
+        /// <returns></returns>
+        //IEnumerable<Message<TState>> Stop<TState>();
     }
 }

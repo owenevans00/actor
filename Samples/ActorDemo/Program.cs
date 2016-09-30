@@ -25,7 +25,7 @@ namespace ActorDemo
             
             Console.ReadKey();
             
-            /*
+            
             Console.WriteLine();
 
             // do it twice to demo that a started actor remains active
@@ -40,7 +40,7 @@ namespace ActorDemo
                (Action<string>)ResultWrapper<string>.ResultHandler);
 
             Console.ReadKey();
-             */
+            
         }
     }
 }
