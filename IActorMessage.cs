@@ -14,5 +14,9 @@ namespace Actor
         void PostTo(IActor actor);
 
         void PostTo(IActor actor, Action<Exception> exceptionHandler);
+
+        void PostTo(IEnumerable<IActor> actors);
+
+        void PostTo(IEnumerable<IActor> actors, Action<Exception> exceptionHandler);
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Actor
 {
@@ -26,6 +23,16 @@ namespace Actor
         public void PostTo(IActor actor, Action<Exception> exceptionHandler)
         {
             actor.Post(this, exceptionHandler);
+        }
+
+        public void PostTo(IEnumerable<IActor> actors)
+        {
+            foreach (var actor in actors) actor.Post(this);
+        }
+
+        public void PostTo(IEnumerable<IActor> actors, Action<Exception> exceptionHandler)
+        {
+            foreach (var actor in actors) actor.Post(this, exceptionHandler);
         }
     }
 }

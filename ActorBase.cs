@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Actor
@@ -16,7 +13,7 @@ namespace Actor
     /// with the message, and this is also attached to the task generated from the message.
     /// Delayed execution of the queue is the default - call Start() to trigger the queue. For 
     /// immediate execution, call the constructor with startImmediately set to true, and the 
-    /// first item posted will be triggred as soon as it's set.
+    /// first item posted will be triggered as soon as it's set.
     /// </summary>
     public abstract class ActorBase : IActor
     {
@@ -40,6 +37,11 @@ namespace Actor
         }
 
         #region Post() methods
+        public void Post<TState>(TState state)
+        {
+            Post(new Message<TState>(state, null));
+        }
+
         public void Post<TState>(Message<TState> message)
         {
             if (_headtask == null)
@@ -56,7 +58,7 @@ namespace Actor
         public void Post<TState>(Message<TState> message, Action resultHandler)
         {
             Post(message);
-            _tailTask.ContinueWith((Action<Task>)(_ => resultHandler()), TaskContinuationOptions.OnlyOnRanToCompletion);
+            _tailTask.ContinueWith(_ => resultHandler(), TaskContinuationOptions.OnlyOnRanToCompletion);
         }
 
         public void Post<TState>(Message<TState> message, Action<Exception> exceptionHandler)
@@ -120,7 +122,12 @@ namespace Actor
             {
                 // all tasks attached to this will start in sequence (although ordering's not 
                 // guaranteed between branches)
-                _headtask.Start();
+                try
+                {
+                    _headtask.Start();
+                }
+                catch (InvalidOperationException) // in rare cases there is a race condition where
+                { }                               // the task is already running
             }
             else
             {
@@ -161,7 +168,7 @@ namespace Actor
         // This allows use to do sensible casting to the actual delegate type instead of
         // resorting to delegate.dynamicinvoke(message), which also removes a layer of 
         // TaskInvocationException in case of exceptions.
-        // A "pure" Actor implementation seems to just uses Action, and it's a bit
+        // A "pure" Actor implementation seems to just use Action, and it's a bit
         // easier to program in this model if we use Actions and Messages in preference
         // to Funcs and callbacks
         

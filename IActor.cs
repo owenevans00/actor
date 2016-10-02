@@ -24,6 +24,8 @@ namespace Actor
     /// </summary>
     public interface IActor
     {
+        void Post<TState>(TState state);
+
         void Post<TState>(Message<TState> message);
 
         void Post<TState>(Message<TState> message, 

@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace Actor
 {
+    /// <summary>
+    /// ResultActor takes a message and simply writes the payload to the console.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class ResultActor<T> : ActorBase
     {
         public ResultActor(bool startImmediately = true)
-            : base(startImmediately) {
-                Init();
+            : base(startImmediately)
+        {
+            Init();
         }
 
         private void Init()
