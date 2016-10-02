@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfActor", "Samples\WpfActo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "Samples\HelloWorld\HelloWorld.csproj", "{6A518F50-D435-48F6-AE89-1BB991B18829}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapReduce", "..\MapReduce\MapReduce.csproj", "{21E5AD79-CD37-4F89-979D-D82614ACEEDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapReduce", "Samples\MapReduce\MapReduce.csproj", "{21E5AD79-CD37-4F89-979D-D82614ACEEDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
